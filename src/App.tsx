@@ -1,25 +1,24 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useRecoilState } from 'recoil'
+import { documentStoreState } from './state/Documents'
+import { v4 } from "uuid"
 
 function App() {
+  const [ documentList, setDocuments ] = useRecoilState(documentStoreState);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+   <>
+     <button
+          onClick={(_) => {
+            setDocuments([...documentList, { id: v4(), name: 'test', type: 'FOLDER' }]);
+          }}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+          Add Document
+        </button>
+    {documentList.map((document) => (
+        <>{document.name}</>
+      ))}
+   </>
   );
 }
 
