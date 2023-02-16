@@ -34,7 +34,7 @@ const AddFolderModal: React.FC = () => {
   const closeModal = useCallback(() => {
     reset();
     setShowModal(false);
-  }, [setShowModal]);
+  }, [setShowModal, reset]);
   const openModal = useCallback(() => setShowModal(true), [setShowModal]);
   const onSubmit = useCallback(
     (data: FormState) => {

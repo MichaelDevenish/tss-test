@@ -9,7 +9,7 @@ const documentStoreState = atom<Readonly<Array<File | Folder>>>({
   effects: [
     syncEffect({
       storeKey: "local",
-      refine: custom((store: any) => (store?.length > 0 ? store : [])),
+      refine: custom((store) => ((store as Readonly<Array<File | Folder>>)?.length > 0 ? store : []) as Readonly<Array<File | Folder>>),
     }),
   ],
 });

@@ -9,8 +9,8 @@ import {
 
 const DocumentBreadcrumbs: React.FC = () => {
   const breadcrumbs = useRecoilValue(documentPath);
-  const [path, setParent] = useRecoilState(documentParentState);
-  const [search, setSearch] = useRecoilState(documentSearchState);
+  const [, setParent] = useRecoilState(documentParentState);
+  const [, setSearch] = useRecoilState(documentSearchState);
 
   const setParentId = useCallback(
     (parentId?: string | null) => {
@@ -24,7 +24,7 @@ const DocumentBreadcrumbs: React.FC = () => {
     <>
       <Typography
         component="span"
-        sx={{ cursor: "pointer" }}
+        sx={{ cursor: "pointer", overflow: "hidden", display: "inline-block" }}
         onClick={() => setParentId(null)}
       >
         Home
@@ -34,7 +34,13 @@ const DocumentBreadcrumbs: React.FC = () => {
           <Typography
             key={breadcrumb.id}
             component="span"
-            sx={{ cursor: "pointer" }}
+            sx={{
+              cursor: "pointer",
+              maxWidth: "150px",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              display: "inline-block",
+            }}
             onClick={() => setParentId(breadcrumb.id)}
           >
             &nbsp;&#x2f;&nbsp;{breadcrumb.name}

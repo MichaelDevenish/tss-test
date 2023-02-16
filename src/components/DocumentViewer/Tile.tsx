@@ -15,14 +15,23 @@ const Tile: React.FC<FolderTileProps> = ({ name, onDoubleClick, icon }) => {
         justifyContent: "space-evenly",
         flexDirection: "column",
         border: "1px solid grey",
-        width: "100%",
+        width: "calc(100% - 40px)",
         height: "100px",
+        padding: "20px",
         cursor: "pointer",
       }}
       onDoubleClick={onDoubleClick}
     >
       {icon}
-      <Typography>{name}</Typography>
+      <Typography
+        sx={{
+          textOverflow: "ellipsis",
+          overflow: "hidden",
+          maxWidth: "100%",
+        }}
+      >
+        {name}
+      </Typography>
     </Box>
   );
 };

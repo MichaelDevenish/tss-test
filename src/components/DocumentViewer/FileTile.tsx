@@ -27,10 +27,20 @@ const FileTile: React.FC<FileTileProps> = ({ file }) => {
         onDoubleClick={openModal}
       />
       <Dialog open={showModal} onClose={closeModal} fullWidth>
-        <DialogTitle>Reading File: {file.name}</DialogTitle>
+        <DialogTitle
+          sx={{
+            maxWidth: "600px",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            whiteSpace: "nowrap",
+            display: "inline-block",
+          }}
+        >
+          Reading File: {file.name}
+        </DialogTitle>
         <DialogContent>
           <DialogTitle>
-            <Typography style={{ whiteSpace: "pre-line" }}>
+            <Typography style={{ whiteSpace: "pre-line", wordBreak: 'break-word' }}>
               {file.content}
             </Typography>
           </DialogTitle>

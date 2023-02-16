@@ -13,8 +13,8 @@ interface FolderTileProps {
 }
 
 const FolderTile: React.FC<FolderTileProps> = ({ folder }) => {
-  const [parentId, setParent] = useRecoilState(documentParentState);
-  const [search, setSearch] = useRecoilState(documentSearchState);
+  const [, setParent] = useRecoilState(documentParentState);
+  const [, setSearch] = useRecoilState(documentSearchState);
 
   const setParentId = useCallback(() => {
     setParent(folder.id);
