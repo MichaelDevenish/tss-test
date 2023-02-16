@@ -1,16 +1,15 @@
 import type { File } from "../../state/Documents";
 import InsertDriveFileIcon from "@mui/icons-material/InsertDriveFile";
 import {
-  Box,
   Button,
   Dialog,
   DialogActions,
   DialogContent,
   DialogTitle,
-  Stack,
   Typography,
 } from "@mui/material";
 import { useState, useCallback } from "react";
+import { Tile } from "./Tile";
 
 interface FileTileProps {
   file: File;
@@ -22,22 +21,11 @@ const FileTile: React.FC<FileTileProps> = ({ file }) => {
   const closeModal = useCallback(() => setShowModal(false), [setShowModal]);
   return (
     <>
-      <Box
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-evenly",
-          flexDirection: "column",
-          border: "1px solid grey",
-          width: "100%",
-          height: "100px",
-          cursor: "pointer",
-        }}
+      <Tile
+        icon={<InsertDriveFileIcon fontSize="large" />}
+        name={file.name}
         onDoubleClick={openModal}
-      >
-        <InsertDriveFileIcon fontSize="large" />
-        <Typography>{file.name}</Typography>
-      </Box>
+      />
       <Dialog open={showModal} onClose={closeModal} fullWidth>
         <DialogTitle>Reading File: {file.name}</DialogTitle>
         <DialogContent>

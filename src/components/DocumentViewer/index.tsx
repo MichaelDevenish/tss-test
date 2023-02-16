@@ -1,5 +1,5 @@
-import { Grid, Stack } from "@mui/material";
-import React, { Fragment } from "react";
+import { Grid } from "@mui/material";
+import React from "react";
 import { useRecoilValue } from "recoil";
 import { filteredDocumentState, DocumentType } from "../../state/Documents";
 import { FileTile } from "./FileTile";
@@ -20,7 +20,7 @@ const DocumentViewer: React.FC = () => {
   return (
     <Grid container spacing={2}>
       {documentList.map((document) => (
-        <Grid item xs={2} key={document.id}>
+        <Grid item xs={2} xl={1} key={document.id}>
           <Document document={document} />
         </Grid>
       ))}

@@ -11,7 +11,7 @@ import { useForm } from "react-hook-form";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { v4 } from "uuid";
 import {
-  documentFilterState,
+  documentParentState,
   documentStoreState,
   DocumentType,
 } from "../../state/Documents";
@@ -22,7 +22,7 @@ interface FormState {
 
 const AddFolderModal: React.FC = () => {
   const [showModal, setShowModal] = useState<boolean>(false);
-  const filters = useRecoilValue(documentFilterState);
+  const parentId = useRecoilValue(documentParentState);
   const [documentList, setDocuments] = useRecoilState(documentStoreState);
   const {
     register,
@@ -44,12 +44,12 @@ const AddFolderModal: React.FC = () => {
           id: v4(),
           name: data.name,
           type: DocumentType.FOLDER,
-          parentId: filters.parentId,
+          parentId,
         },
       ]);
       closeModal();
     },
-    [documentList, setDocuments, closeModal, filters]
+    [documentList, setDocuments, closeModal, parentId]
   );
 
   return (

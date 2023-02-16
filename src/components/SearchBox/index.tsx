@@ -1,19 +1,19 @@
 import { TextField } from "@mui/material";
 import { ChangeEvent, useCallback, useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
-import { documentFilterState } from "../../state/Documents";
+import { documentSearchState } from "../../state/Documents";
 import { useDebouncedCallback } from "use-debounce";
 
 const SearchBox: React.FC = () => {
-  const [filters, setFilters] = useRecoilState(documentFilterState);
-  const [value, setValue] = useState<string>(filters.search ?? "");
+  const [search, setSearch] = useRecoilState(documentSearchState);
+  const [value, setValue] = useState<string>(search ?? "");
   useEffect(() => {
-    if (!filters.search) {
+    if (!search) {
       setValue("");
     }
-  }, [filters.search]);
+  }, [search]);
   const setDebounced = useDebouncedCallback(
-    (search) => setFilters({ ...filters, search }),
+    (search) => setSearch(search),
     1000
   );
   const setSearchText = useCallback(

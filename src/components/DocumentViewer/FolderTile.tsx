@@ -1,36 +1,31 @@
-import { documentFilterState, Folder } from "../../state/Documents";
+import {
+  documentParentState,
+  documentSearchState,
+  Folder,
+} from "../../state/Documents";
 import FolderIcon from "@mui/icons-material/Folder";
 import { useRecoilState } from "recoil";
-import { Box, Stack, Typography } from "@mui/material";
 import { useCallback } from "react";
+import { Tile } from "./Tile";
 
 interface FolderTileProps {
   folder: Folder;
 }
 
 const FolderTile: React.FC<FolderTileProps> = ({ folder }) => {
-  const [filters, setFilters] = useRecoilState(documentFilterState);
-  const setParentId = useCallback(
-    () => setFilters({ parentId: folder.id, search: undefined }),
-    [setFilters, filters, folder.id]
-  );
+  const [parentId, setParent] = useRecoilState(documentParentState);
+  const [search, setSearch] = useRecoilState(documentSearchState);
+
+  const setParentId = useCallback(() => {
+    setParent(folder.id);
+    setSearch(undefined);
+  }, [setParent, setSearch, folder.id]);
   return (
-    <Box
-      sx={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-evenly",
-        flexDirection: "column",
-        border: "1px solid grey",
-        width: "100%",
-        height: "100px",
-        cursor: "pointer",
-      }}
+    <Tile
+      icon={<FolderIcon fontSize="large" />}
+      name={folder.name}
       onDoubleClick={setParentId}
-    >
-      <FolderIcon fontSize="large" />
-      <Typography>{folder.name}</Typography>{" "}
-    </Box>
+    />
   );
 };
 

@@ -6,7 +6,7 @@ enum DocumentType {
 interface Document {
   id: string;
   name: string;
-  parentId?: string;
+  parentId?: string | null;
 }
 
 interface File extends Document {

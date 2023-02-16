@@ -12,7 +12,7 @@ import { useForm } from "react-hook-form";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { v4 } from "uuid";
 import {
-  documentFilterState,
+  documentParentState,
   documentStoreState,
   DocumentType,
 } from "../../state/Documents";
@@ -24,7 +24,7 @@ interface FormState {
 
 const AddFileModal: React.FC = () => {
   const [showModal, setShowModal] = useState<boolean>(false);
-  const filters = useRecoilValue(documentFilterState);
+  const parentId = useRecoilValue(documentParentState);
   const [documentList, setDocuments] = useRecoilState(documentStoreState);
   const {
     register,
@@ -47,12 +47,12 @@ const AddFileModal: React.FC = () => {
           name: data.name,
           type: DocumentType.FILE,
           content: data.content,
-          parentId: filters.parentId,
+          parentId,
         },
       ]);
       closeModal();
     },
-    [documentList, setDocuments, closeModal, filters]
+    [documentList, setDocuments, closeModal, parentId]
   );
 
   return (
@@ -61,7 +61,7 @@ const AddFileModal: React.FC = () => {
         Create New File
       </Button>
       <Dialog open={showModal} onClose={closeModal} fullWidth>
-        <DialogTitle>New Folder</DialogTitle>
+        <DialogTitle>New File</DialogTitle>
         <DialogContent>
           <form onSubmit={handleSubmit(onSubmit)}>
             <Grid container direction={"column"} spacing={4}>
