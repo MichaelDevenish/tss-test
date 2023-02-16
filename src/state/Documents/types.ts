@@ -1,20 +1,22 @@
+enum DocumentType {
+  FILE,
+  FOLDER,
+}
+
 interface Document {
-    id: string
-    name: string
-    parentId?: string
+  id: string;
+  name: string;
+  parentId?: string;
 }
 
 interface File extends Document {
-    type: 'DOCUMENT'
-    content: string
+  type: DocumentType.FILE;
+  content: string;
 }
 
 interface Folder extends Document {
-    type: 'FOLDER'
+  type: DocumentType.FOLDER;
 }
 
-export type {
-    Document,
-    File,
-    Folder
-}
+export type { Document, File, Folder };
+export { DocumentType };

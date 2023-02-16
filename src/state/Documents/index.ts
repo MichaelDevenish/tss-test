@@ -1,13 +1,29 @@
-import { atom } from 'recoil'
-import { File, Folder } from './types'
+import { atom, selector } from "recoil";
+import { File, Folder } from "./types";
 
 const documentStoreState = atom<Array<File | Folder>>({
-    key: 'DocumentStore',
-    default: [],
-})
+  key: "DocumentStore",
+  default: [],
+});
 
-// todo setup selector https://recoiljs.org/docs/basic-tutorial/selectors
+const documentFilterState = atom<{ search?: string; parentId?: string }>({
+  key: "DocumentFilter",
+  default: { search: undefined, parentId: undefined },
+});
 
-export {
-    documentStoreState
-}
+const filteredDocumentState = selector({
+  key: "FilteredDocumentStore",
+  get: ({ get }) => {
+    const filter = get(documentFilterState);
+    let list = get(documentStoreState);
+
+    if (filter.parentId) {
+      list = list.filter((document) => filter.parentId === document.parentId);
+    }
+
+    return list;
+  },
+});
+
+export { filteredDocumentState, documentFilterState, documentStoreState };
+export * from "./types";
