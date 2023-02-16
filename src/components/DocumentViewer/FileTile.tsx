@@ -8,6 +8,7 @@ import {
   DialogContent,
   DialogTitle,
   Stack,
+  Typography,
 } from "@mui/material";
 import { useState, useCallback } from "react";
 
@@ -34,13 +35,17 @@ const FileTile: React.FC<FileTileProps> = ({ file }) => {
         }}
         onDoubleClick={openModal}
       >
-        <InsertDriveFileIcon />
-        {file.name}
+        <InsertDriveFileIcon fontSize="large" />
+        <Typography>{file.name}</Typography>
       </Box>
       <Dialog open={showModal} onClose={closeModal} fullWidth>
         <DialogTitle>Reading File: {file.name}</DialogTitle>
         <DialogContent>
-          <DialogTitle>{file.content}</DialogTitle>
+          <DialogTitle>
+            <Typography style={{ whiteSpace: "pre-line" }}>
+              {file.content}
+            </Typography>
+          </DialogTitle>
         </DialogContent>
         <DialogActions>
           <Button onClick={closeModal}>Close</Button>
@@ -51,4 +56,3 @@ const FileTile: React.FC<FileTileProps> = ({ file }) => {
 };
 
 export { FileTile };
-// todo render multiline

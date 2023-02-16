@@ -2,10 +2,14 @@ import { DocumentViewer } from "../../components/DocumentViewer";
 import { AddFolderModal } from "../../components/AddFolderModal";
 import { AddFileModal } from "../../components/AddFileModal";
 import { Grid } from "@mui/material";
+import { SearchBox } from "../../components/SearchBox";
 
-function App() {
+const App: React.FC = () => {
   return (
-    <Grid container spacing={4}>
+    <Grid container spacing={2}>
+      <Grid item xs={12}>
+        <SearchBox />
+      </Grid>
       <Grid item>
         <AddFolderModal />
       </Grid>
@@ -17,10 +21,9 @@ function App() {
       </Grid>
     </Grid>
   );
-}
+};
 
 export default App;
 
-// todo  search
 // todo stretch goals
 // todo cleanup

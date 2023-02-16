@@ -17,6 +17,12 @@ const filteredDocumentState = selector({
     const filter = get(documentFilterState);
     let list = get(documentStoreState);
 
+    if (filter.search && filter.search !== "") {
+      return list.filter((document) =>
+        document.name.startsWith(filter.search!)
+      );
+    }
+
     if (filter.parentId) {
       list = list.filter((document) => filter.parentId === document.parentId);
     }

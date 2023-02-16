@@ -1,7 +1,7 @@
 import { documentFilterState, Folder } from "../../state/Documents";
 import FolderIcon from "@mui/icons-material/Folder";
 import { useRecoilState } from "recoil";
-import { Box, Stack } from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
 import { useCallback } from "react";
 
 interface FolderTileProps {
@@ -11,7 +11,7 @@ interface FolderTileProps {
 const FolderTile: React.FC<FolderTileProps> = ({ folder }) => {
   const [filters, setFilters] = useRecoilState(documentFilterState);
   const setParentId = useCallback(
-    () => setFilters({ ...filters, parentId: folder.id }),
+    () => setFilters({ parentId: folder.id, search: undefined }),
     [setFilters, filters, folder.id]
   );
   return (
@@ -28,8 +28,8 @@ const FolderTile: React.FC<FolderTileProps> = ({ folder }) => {
       }}
       onDoubleClick={setParentId}
     >
-      <FolderIcon />
-      {folder.name}
+      <FolderIcon fontSize="large" />
+      <Typography>{folder.name}</Typography>{" "}
     </Box>
   );
 };
